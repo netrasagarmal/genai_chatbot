@@ -1,26 +1,6 @@
-# from langchain_openai import ChatOpenAI
-# from langchain_core.prompts import ChatPromptTemplate
-# from langchain_core.output_parsers import StrOutputParser
-# from ... import openai_api_key
-
-# os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
-
-
-# ## Prompt Template
-
-# prompt=ChatPromptTemplate.from_messages(
-#     [
-#         ("system","You are a helpful assistant. Please response to the user queries"),
-#         ("user","Question:{question}")
-#     ]
-# )
-
-# # openAI LLm 
-# llm=ChatOpenAI(model="gpt-3.5-turbo")
-# output_parser=StrOutputParser()
-# chain=prompt|llm|output_parser
-
-
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 import sys
 import os
 
@@ -33,7 +13,20 @@ sys.path.append(parent_dir)
 # Now you can import abc.py
 import openai_api_key
 
-# Example function call from abc.py (if it has one)
-# abc.some_function()
 
-print(openai_api_key.OPENAI_API_KEY)
+
+# print(openai_api_key.OPENAI_API_KEY)
+
+question = "Hi, how are you?"
+## Prompt Template
+
+prompt=[
+        ("system","You are a helpful assistant. Please response to the user queries"),
+        ("user","Question:{question}")
+    ]
+
+# openAI LLm 
+llm=ChatOpenAI(model="gpt-4o", api_key=openai_api_key.OPENAI_API_KEY)
+
+response = llm.invoke(prompt)
+print(response)
