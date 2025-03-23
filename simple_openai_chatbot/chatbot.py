@@ -13,20 +13,27 @@ sys.path.append(parent_dir)
 # Now you can import abc.py
 import openai_api_key
 
+async def get_llm_answer(question:str):
 
+    user_prompt = """
+    Please answer the following question given below, if you dont know then simply say no. 
+    
+    Question: {question}
+                
+    """
 
-# print(openai_api_key.OPENAI_API_KEY)
+    ## Prompt Template
+    prompt=[
+            ("system","You are a helpful assistant. Please response to the user queries"),
+            ("user",)
+        ]
 
-question = "Hi, how are you?"
-## Prompt Template
+    # openAI LLm 
+    # llm = ChatOpenAI(
+    #     model="gpt-3.5-turbo",
+    #     api_key=openai_api_key.OPENAI_API_KEY,  # if you prefer to pass api key in directly
+    # )
 
-prompt=[
-        ("system","You are a helpful assistant. Please response to the user queries"),
-        ("user","Question:{question}")
-    ]
-
-# openAI LLm 
-llm=ChatOpenAI(model="gpt-4o", api_key=openai_api_key.OPENAI_API_KEY)
-
-response = llm.invoke(prompt)
-print(response)
+    # response = llm.invoke(prompt)
+    return "hi"
+    
