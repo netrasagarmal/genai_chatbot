@@ -9,11 +9,21 @@ app = FastAPI()
 # Define a BaseModel for request/response data
 class RequestBody(BaseModel):
     question: str
+    max_output_tokens : int = 1
+    temperature:float = 0.0
+    top_p : float = 0.50
+    top_k : int = 50
+    penealty : float= 0.0
 
 @app.post("/chat")
-async def create_item(request: RequestBody):
+async def create_item(request: RequestBody)->dict:
 
-    llm_response = await get_llm_answer(question = request.question)
+    llm_response = await get_llm_answer(question = request.question,
+                                        max_output_tokens = request.max_output_tokens,
+                                        temperature = request.temperature,
+                                        top_p = request.top_p,
+                                        top_k = request.top_k,
+                                        penealty = request.penealty)
     
     return {"response": llm_response}
 
